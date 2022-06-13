@@ -344,24 +344,6 @@ def weather_info():
     return jsonify({'message': message, 'status': status, 'data': res }), code
 
 
-'''
-        posts = db['weatherHistory'].find_one(filter)
-        
-        print (jsonify({posts}))
-        if posts:
-            message = "Weather info found"
-            status = "success"
-            code = 200
-            return jsonify({'Weather' : posts, 'status': status, "message": message}), code
-        else:
-            message = "Weather info not found"
-            status = "fail"
-            code = 404
-    except Exception as ex:
-        message = f"{ex}"
-        code = 500
-    return jsonify({'status': status, "message": message, "data": data}), code    
-'''
 
 @app.route('/')
 def test():
