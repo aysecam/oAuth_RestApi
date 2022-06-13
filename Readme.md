@@ -7,3 +7,6 @@
 #TimeSeries dataseti de github a ekleyeceğim, farklı şehirlere göre bulamadım fakat bir çok condtionı bulunmakta.
 
 #http://localhost:5000/weather?PrecipType=rain --> veri seti içinde Precip Type kolunun altında rain olan bütün kayıtları listelemekte.
+
+#veri setimi de ekliyorum, dockerda çalıştırabildim 
+
