@@ -1,15 +1,8 @@
-import code
 from dataclasses import dataclass
 from distutils.log import debug
 from email import message
 from lib2to3.pgen2 import token
 from os import stat
-import re
-import secrets
-import string
-from sys import setswitchinterval
-from tabnanny import check
-from unittest.result import failfast
 from urllib import response
 import uuid
 from django.template import Origin
@@ -22,16 +15,14 @@ import jwt
 from datetime import datetime, timedelta
 from flask_bcrypt import Bcrypt
 from functools import wraps
-from bson.objectid import ObjectId
-
 
 
 app = Flask(__name__)
-CORS(app, resources = {r"/*":{"orgins":"*"}}) #What??
-bcrypt = Bcrypt(app) #what?
+CORS(app, resources = {r"/*":{"orgins":"*"}}) #cross-origin requests
+bcrypt = Bcrypt(app) #password hashing function
 
-mongo = MongoClient('localhost',27017)
-db = mongo['backendtask'] # db name
+mongo = MongoClient('localhost',27017) 
+db = mongo['backendtask'] #dbname
 
 app.config['JWT_SECRET_KEY'] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.Rf32AQPl_46JhmGqlJ7aBldhtqjnDJ3zdMj0rPINi_8"
 
@@ -130,7 +121,6 @@ def save_user():
     status = "fail"
     try:
         data = request.get_json()
-        #TODO kontrol ekle daha önce kayıt olmuş mu?
         
         data['_id'] = str(uuid.uuid4())
         data['password'] = bcrypt.generate_password_hash(data['password']).decode('utf-8') #if password is not encp, its not stored in db
@@ -139,7 +129,7 @@ def save_user():
 
         resp = db["user"].insert_one(data)
         
-        if resp.acknowledged: #wth??
+        if resp.acknowledged: 
             status = "success"
             message = "user created"
             code = 201 
@@ -347,7 +337,7 @@ def weather_info():
 
 @app.route('/')
 def test():
-    return "amanda aman oldu mu şimdii", 200
+    return "test 123 test :D", 200
 
 if __name__ == "__main__":
     app.run(debug = true)
