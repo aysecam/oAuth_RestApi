@@ -8,5 +8,12 @@
 
 #http://localhost:5000/weather?PrecipType=rain --> veri seti içinde Precip Type kolunun altında rain olan bütün kayıtları listelemekte.
 
-#veri setimi de ekliyorum, dockerda çalıştırabildim 
+#veri setini mail ile iletiyorum.
 
+
+#docker-compose up -d komutu ile çalıştırıyorum, mongodb ye garip bir şekilde bağlanmıyor port bilgisi doğru olmasına rağmen 
+CONTAINER ID   IMAGE               COMMAND                  CREATED          STATUS         PORTS                      NAMES
+36e59eed01f6   oauth_restapi_app   "python -u app.py"       10 seconds ago   Up 5 seconds   0.0.0.0:5000->5000/tcp     oauth_restapi-app-1
+c4abc8ef0538   mongo               "docker-entrypoint.s…"   13 seconds ago   Up 6 seconds   0.0.0.0:27017->27017/tcp   mongodb
+
+db bağlantısından dolayı aldığım hata : localhost:27017: [Errno 111] Connection refused, Timeout: 30s, Topology Description: <TopologyDescription id: 62aab885e1b2e1e28e5cc53b, topology_type: Unknown, servers: [<ServerDescription ('localhost', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('localhost:27017: [Errno 111] Connection refused')

@@ -15,13 +15,16 @@ import jwt
 from datetime import datetime, timedelta
 from flask_bcrypt import Bcrypt
 from functools import wraps
-
+import os
 
 app = Flask(__name__)
 CORS(app, resources = {r"/*":{"orgins":"*"}}) #cross-origin requests
 bcrypt = Bcrypt(app) #password hashing function
 
-mongo = MongoClient('localhost',27017) 
+#mongo = MongoClient('localhost',27017) 
+
+mongo = MongoClient('mongodb://localhost:27017/')
+
 db = mongo['backendtask'] #dbname
 
 app.config['JWT_SECRET_KEY'] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.Rf32AQPl_46JhmGqlJ7aBldhtqjnDJ3zdMj0rPINi_8"
@@ -334,13 +337,13 @@ def weather_info():
     return jsonify({'message': message, 'status': status, 'data': res }), code
 
 
-
 @app.route('/')
 def test():
     return "test 123 test :D", 200
 
+
 if __name__ == "__main__":
-    app.run(debug = true)
+    app.run(host="0.0.0.0", debug=True)
     
 
 
